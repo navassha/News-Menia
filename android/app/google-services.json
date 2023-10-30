@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "758992724359",
+    "project_id": "news-menia-ebbbd",
+    "storage_bucket": "news-menia-ebbbd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:758992724359:android:6ae544b956c33d8b8d3322",
+        "android_client_info": {
+          "package_name": "com.example.news_menia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_EeiT0lVy7_JYimebi-83xc0Ny0gZ6Hw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
