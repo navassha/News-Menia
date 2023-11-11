@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_menia/provider/auth_providers.dart';
@@ -16,7 +15,7 @@ class AuthSwitcher extends ConsumerWidget {
             if (data == null) {
               return const GetStartedPage();
             }
-            return const HomePage();
+            return HomePage();
           },
           error: (error, stackTrace) => const Center(
             child: Styledtext(text: "Somthing Went Wrong", size: 23),

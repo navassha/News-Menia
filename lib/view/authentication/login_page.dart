@@ -9,6 +9,7 @@ import 'package:news_menia/extensions/responsive.size.dart';
 import 'package:news_menia/provider/auth_providers.dart';
 import 'package:news_menia/provider/show_password.dart';
 import 'package:news_menia/view/getstarted/getstartedpage.dart';
+import 'package:news_menia/widgets/backButton.dart';
 import 'package:news_menia/widgets/text.dart';
 import 'package:news_menia/widgets/textfield.dart';
 
@@ -111,48 +112,58 @@ class LoginScreen extends ConsumerWidget {
                           SizedBox(
                             height: context.width(35),
                           ),
-                          Center(
-                            child: InkWell(
-                              onTap: () async {
-                                if (email.text.isEmpty &&
-                                    password.text.isEmpty) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      backgroundColor: Colors.white,
-                                      content: Styledtext(
-                                          color: Colors.black,
-                                          text: 'Fill The Madotory Colums',
-                                          size: 18),
-                                    ),
-                                  );
-                                } else {
-                                  try {
-                                    await ref
-                                        .read(authProvider)
-                                        .userLogin(email.text, password.text);
-                                    log("Success");
-                                  } on FirebaseException catch (e) {
-                                    if (context.mounted) {
+                          Row(
+                            children: [
+                              ModiFiedBackButton(),
+                              SizedBox(
+                                width: context.width(60),
+                              ),
+                              Center(
+                                child: InkWell(
+                                  onTap: () async {
+                                    if (email.text.isEmpty &&
+                                        password.text.isEmpty) {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
-                                        SnackBar(
+                                        const SnackBar(
                                           backgroundColor: Colors.white,
                                           content: Styledtext(
-                                            text: '$e',
-                                            size: 18,
-                                          ),
+                                              color: Colors.black,
+                                              text: 'Fill The Madotory Colums',
+                                              size: 18),
                                         ),
                                       );
+                                    } else {
+                                      try {
+                                        await ref.read(authProvider).userLogin(
+                                            email.text, password.text);
+                                        log("Success");
+                                      } on FirebaseException catch (e) {
+                                        if (context.mounted) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              backgroundColor: Colors.white,
+                                              content: Styledtext(
+                                                text: '$e',
+                                                size: 18,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                      }
                                     }
-                                  }
-                                }
-                              },
-                              child: const ClickContainer(
-                                containercolor: Color.fromARGB(255, 15, 34, 49),
-                                text: "Login",
-                                bordercolor: Colors.transparent,
+                                  },
+                                  child: const ClickContainer(
+                                    containercolor:
+                                        Color.fromARGB(255, 15, 34, 49),
+                                    text: "Login",
+                                    bordercolor: Colors.transparent,
+                                  ),
+                                ),
                               ),
-                            ),
+                            ],
                           )
                         ],
                       ),

@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -46,30 +49,20 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDuoK9xJrcfnoP--vhKjCjZhk5xpnzehNY',
-    appId: '1:758992724359:web:89af2ff4f65f90248d3322',
-    messagingSenderId: '758992724359',
-    projectId: 'news-menia-ebbbd',
-    authDomain: 'news-menia-ebbbd.firebaseapp.com',
-    storageBucket: 'news-menia-ebbbd.appspot.com',
-    measurementId: 'G-H272CE4X8W',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyA_EeiT0lVy7_JYimebi-83xc0Ny0gZ6Hw',
-    appId: '1:758992724359:android:6ae544b956c33d8b8d3322',
-    messagingSenderId: '758992724359',
-    projectId: 'news-menia-ebbbd',
-    storageBucket: 'news-menia-ebbbd.appspot.com',
+    apiKey: 'AIzaSyBv0wKK2qq4eY_Q9NHsaqjJ9rPYk5AW-UE',
+    appId: '1:705373710779:android:4123d9d4b2d86f26e63c9e',
+    messagingSenderId: '705373710779',
+    projectId: 'news-app-6c122',
+    storageBucket: 'news-app-6c122.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDv-_nxiYVqlhDbL4cnBV_xHMFi0MMMqAE',
-    appId: '1:758992724359:ios:9361491264dcd06a8d3322',
-    messagingSenderId: '758992724359',
-    projectId: 'news-menia-ebbbd',
-    storageBucket: 'news-menia-ebbbd.appspot.com',
+    apiKey: 'AIzaSyBAbYA2Y-2gv7R2cw7jByR24Y5LkMmfPa0',
+    appId: '1:705373710779:ios:72d2225daba40be3e63c9e',
+    messagingSenderId: '705373710779',
+    projectId: 'news-app-6c122',
+    storageBucket: 'news-app-6c122.appspot.com',
     iosBundleId: 'com.example.newsMenia',
   );
 }

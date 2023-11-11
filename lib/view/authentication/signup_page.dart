@@ -10,6 +10,7 @@ import 'package:news_menia/provider/auth_providers.dart';
 import 'package:news_menia/provider/show_password.dart';
 
 import 'package:news_menia/view/getstarted/getstartedpage.dart';
+import 'package:news_menia/widgets/backButton.dart';
 import 'package:news_menia/widgets/text.dart';
 import 'package:news_menia/widgets/textfield.dart';
 
@@ -127,49 +128,55 @@ class SignUpScreen extends ConsumerWidget {
                           SizedBox(
                             height: context.width(20),
                           ),
-                          Center(
-                            child: InkWell(
-                              onTap: () async {
-                                if (name.text.isEmpty &&
-                                    email.text.isEmpty &&
-                                    password.text.isEmpty) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      backgroundColor: Colors.white,
-                                      content: Styledtext(
-                                        text: "Fill the Madotory Columns",
-                                        size: 18,
-                                      ),
-                                    ),
-                                  );
-                                } else {
-                                  try {
-                                    ref
-                                        .read(authProvider)
-                                        .createUser(email.text, password.text);
-                                  } on FirebaseException catch (e) {
-                                    if (context.mounted) {
+                          Row(
+                            children: [
+                              ModiFiedBackButton(),
+                              SizedBox(
+                                width: context.width(60),
+                              ),
+                              Center(
+                                child: InkWell(
+                                  onTap: () async {
+                                    if (name.text.isEmpty &&
+                                        email.text.isEmpty &&
+                                        password.text.isEmpty) {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
-                                        SnackBar(
+                                        const SnackBar(
                                           backgroundColor: Colors.white,
                                           content: Styledtext(
-                                            text: "$e",
+                                            text: "Fill the Madotory Columns",
                                             size: 18,
                                           ),
                                         ),
                                       );
-                                      print('$e');
+                                    } else {
+                                      try {
+                                        ref.read(authProvider).createUser(
+                                            email.text, password.text);
+                                      } on FirebaseException catch (e) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            backgroundColor: Colors.white,
+                                            content: Styledtext(
+                                              text: "$e",
+                                              size: 18,
+                                            ),
+                                          ),
+                                        );
+                                      }
                                     }
-                                  }
-                                }
-                              },
-                              child: const ClickContainer(
-                                containercolor: Color.fromARGB(255, 15, 34, 49),
-                                text: "Sign Up",
-                                bordercolor: Colors.transparent,
+                                  },
+                                  child: const ClickContainer(
+                                    containercolor:
+                                        Color.fromARGB(255, 15, 34, 49),
+                                    text: "Sign Up",
+                                    bordercolor: Colors.transparent,
+                                  ),
+                                ),
                               ),
-                            ),
+                            ],
                           )
                         ],
                       ),
