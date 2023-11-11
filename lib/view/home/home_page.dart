@@ -17,8 +17,8 @@ class HomePage extends ConsumerWidget {
   final paagecontroller = PageController(initialPage: 0);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final pageindex = ref.read(homeRowProvider);
     return Scaffold(
+      extendBody: true,
       appBar: AppBar(
         toolbarHeight: context.width(70),
         // automaticallyImplyLeading: false,
@@ -121,15 +121,16 @@ class HomePage extends ConsumerWidget {
                 height: context.width(700),
                 // color: Colors.amber,
                 child: PageView(
+                  controller: paagecontroller,
                   onPageChanged: (value) {
                     ref.read(homeRowProvider.notifier).state = value;
-                    if (paagecontroller.hasClients) {
-                      paagecontroller.animateToPage(
-                        pageindex,
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.linear,
-                      );
-                    }
+                    // if (paagecontroller.hasClients) {
+                    //   paagecontroller.animateToPage(
+                    //     ref.watch(homeRowProvider),
+                    //     duration: const Duration(milliseconds: 300),
+                    //     curve: Curves.linear,
+                    //   );
+                    // }
                   },
                   children: const [
                     LatestNews(),
@@ -143,7 +144,17 @@ class HomePage extends ConsumerWidget {
           ),
         ),
       ),
-      endDrawer: const Drawer(),
+      endDrawer: Drawer(
+        child: Column(
+          children: [
+            Container(
+              width: context.width(60),
+              height: context.width(70),
+              color: Colors.amber,
+            )
+          ],
+        ),
+      ),
     );
   }
 }

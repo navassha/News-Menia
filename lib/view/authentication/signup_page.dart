@@ -130,7 +130,7 @@ class SignUpScreen extends ConsumerWidget {
                           ),
                           Row(
                             children: [
-                              ModiFiedBackButton(),
+                              const ModiFiedBackButton(),
                               SizedBox(
                                 width: context.width(60),
                               ),
@@ -152,19 +152,22 @@ class SignUpScreen extends ConsumerWidget {
                                       );
                                     } else {
                                       try {
-                                        ref.read(authProvider).createUser(
+                                        await ref.read(authProvider).createUser(
                                             email.text, password.text);
                                       } on FirebaseException catch (e) {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            backgroundColor: Colors.white,
-                                            content: Styledtext(
-                                              text: "$e",
-                                              size: 18,
+                                        if (context.mounted) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              backgroundColor: Colors.white,
+                                              content: Styledtext(
+                                                color: Colors.black,
+                                                text: "$e",
+                                                size: 18,
+                                              ),
                                             ),
-                                          ),
-                                        );
+                                          );
+                                        }
                                       }
                                     }
                                   },

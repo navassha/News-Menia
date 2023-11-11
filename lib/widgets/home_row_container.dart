@@ -20,11 +20,8 @@ class HomeRowContainer extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
       onTap: () {
-        if (pageController.hasClients) {
-          pageController.animateToPage(number,
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.linear);
-        }
+        pageController.jumpToPage(number);
+
         ref.read(homeRowProvider.notifier).state = number;
       },
       child: Container(
