@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_menia/extensions/responsive.size.dart';
 import 'package:news_menia/provider/home_row.dart';
 import 'package:news_menia/view/pages/health_news.dart';
-import 'package:news_menia/view/pages/latest_news.dart';
+import 'package:news_menia/view/pages/latestnews.dart';
 import 'package:news_menia/view/pages/politics_news.dart';
 import 'package:news_menia/view/pages/sports_news.dart';
 import 'package:news_menia/widgets/home_row_container.dart';
@@ -124,13 +124,6 @@ class HomePage extends ConsumerWidget {
                   controller: paagecontroller,
                   onPageChanged: (value) {
                     ref.read(homeRowProvider.notifier).state = value;
-                    // if (paagecontroller.hasClients) {
-                    //   paagecontroller.animateToPage(
-                    //     ref.watch(homeRowProvider),
-                    //     duration: const Duration(milliseconds: 300),
-                    //     curve: Curves.linear,
-                    //   );
-                    // }
                   },
                   children: const [
                     LatestNews(),

@@ -33,7 +33,7 @@ class NewsModel {
 class Article {
   Source source;
   String? author;
-  String title;
+  String? title;
   String description;
   String url;
   String? urlToImage;

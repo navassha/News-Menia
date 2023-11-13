@@ -19,6 +19,7 @@ class HomeRowContainer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
+      borderRadius: BorderRadius.circular(context.width(30)),
       onTap: () {
         pageController.jumpToPage(number);
 

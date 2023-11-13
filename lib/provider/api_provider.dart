@@ -7,3 +7,15 @@ final apiSerivcesProvider = Provider<ApiModel>((ref) {
 final latestNewspro = FutureProvider((ref) async {
   return ref.read(apiSerivcesProvider).getapi();
 });
+
+final apisportsPro = FutureProvider((ref) async {
+  return ref.read(apiSerivcesProvider).getsportsApi();
+});
+
+final apiHealthPro = FutureProvider((ref) async {
+  return ref.read(apiSerivcesProvider).getHealthApi();
+});
+
+final apiPolitshPro = FutureProvider((ref) async {
+  return ref.read(apiSerivcesProvider).getPoliticshApi();
+});
