@@ -1,18 +1,22 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_menia/extensions/responsive.size.dart';
+import 'package:news_menia/model/fav_model.dart';
 import 'package:news_menia/model/news_model.dart';
+import 'package:news_menia/provider/fav_provider.dart';
 import 'package:news_menia/view/home/webview.dart';
 import 'package:news_menia/widgets/text.dart';
 
-class NewsInDeatail extends StatelessWidget {
+class NewsInDeatail extends ConsumerWidget {
   const NewsInDeatail({super.key, required this.article});
 
   final Article article;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final fav = ref.watch(favBool);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.pink[200],
@@ -105,11 +109,27 @@ class NewsInDeatail extends StatelessWidget {
                   ),
                   const Spacer(),
                   IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      CupertinoIcons.heart,
-                      size: context.width(30),
-                    ),
+                    onPressed: () {
+                      ref.read(favBool.notifier).state = !fav;
+                      article.fav = !fav;
+
+                      ref.read(favNotifierProvider.notifier).addingToFav(
+                            FavModel(
+                              isfav: article.fav,
+                              article: article,
+                            ),
+                          );
+                    },
+                    icon: article.fav == false
+                        ? Icon(
+                            CupertinoIcons.heart,
+                            size: context.width(30),
+                          )
+                        : Icon(
+                            CupertinoIcons.heart_fill,
+                            size: context.width(30),
+                            color: Colors.pink,
+                          ),
                   ),
                   IconButton(
                     onPressed: () {},
@@ -148,6 +168,9 @@ class NewsInDeatail extends StatelessWidget {
                   fontFamily: "mainfont",
                   fontSize: context.width(19),
                 ),
+              ),
+              SizedBox(
+                height: context.width(20),
               ),
               Center(
                 child: InkWell(

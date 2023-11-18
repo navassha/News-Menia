@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_menia/extensions/responsive.size.dart';
 import 'package:news_menia/provider/api_provider.dart';
+import 'package:news_menia/provider/fav_provider.dart';
 import 'package:news_menia/view/home/news_details.dart';
+import 'package:news_menia/widgets/favbotton.dart';
 import 'package:news_menia/widgets/loading_skeltons.dart';
 import 'package:news_menia/widgets/text.dart';
 
@@ -15,6 +17,7 @@ class PoliticsNews extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final fav = ref.watch(favBool);
     return Scaffold(
       body: ref.watch(apiPolitshPro).when(
             data: (data) {
@@ -28,11 +31,13 @@ class PoliticsNews extends ConsumerWidget {
                 itemCount: data!.articles.length,
                 itemBuilder: (context, index) => InkWell(
                   onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            NewsInDeatail(article: data.articles[index]),
-                      )),
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => NewsInDeatail(
+                        article: data.articles[index],
+                      ),
+                    ),
+                  ),
                   child: SizedBox(
                     width: MediaQuery.sizeOf(context).width,
                     height: context.width(400),
@@ -83,11 +88,19 @@ class PoliticsNews extends ConsumerWidget {
                             children: [
                               const Spacer(),
                               IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  CupertinoIcons.heart,
-                                  size: context.width(30),
-                                ),
+                                onPressed: () {
+                                  favBottonWorking(ref, fav, data, index);
+                                },
+                                icon: data.articles[index].fav == false
+                                    ? Icon(
+                                        CupertinoIcons.heart,
+                                        size: context.width(30),
+                                      )
+                                    : Icon(
+                                        CupertinoIcons.heart_fill,
+                                        size: context.width(30),
+                                        color: Colors.pink,
+                                      ),
                               ),
                               IconButton(
                                 onPressed: () {},

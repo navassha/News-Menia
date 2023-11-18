@@ -39,8 +39,10 @@ class Article {
   String? urlToImage;
   DateTime publishedAt;
   String content;
+  bool fav;
 
   Article({
+    this.fav = false,
     required this.source,
     required this.author,
     required this.title,
