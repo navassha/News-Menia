@@ -8,6 +8,7 @@ import 'package:news_menia/provider/home_row.dart';
 import 'package:news_menia/view/pages/health_news.dart';
 import 'package:news_menia/view/pages/latestnews.dart';
 import 'package:news_menia/view/pages/politics_news.dart';
+import 'package:news_menia/view/pages/search_pages.dart';
 import 'package:news_menia/view/pages/sports_news.dart';
 import 'package:news_menia/widgets/home_row_container.dart';
 import 'package:news_menia/widgets/text.dart';
@@ -49,10 +50,20 @@ class HomePage extends ConsumerWidget {
                 fontWeight: FontWeight.w700,
               ),
               const Spacer(),
-              Icon(
-                CupertinoIcons.search,
-                size: context.width(25),
-              ),
+              IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SearchPage(),
+                    ),
+                  );
+                },
+                icon: Icon(
+                  CupertinoIcons.search,
+                  size: context.width(25),
+                ),
+              )
             ],
           ),
         ),

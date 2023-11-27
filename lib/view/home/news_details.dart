@@ -163,7 +163,9 @@ class NewsInDeatail extends ConsumerWidget {
                 height: context.width(10),
               ),
               Text(
-                article.description,
+                article.description == null
+                    ? "No Description"
+                    : article.description.toString(),
                 style: TextStyle(
                   fontFamily: "mainfont",
                   fontSize: context.width(19),

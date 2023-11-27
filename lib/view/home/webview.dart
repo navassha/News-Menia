@@ -8,15 +8,12 @@ class WebViewContainer extends StatelessWidget {
   const WebViewContainer({super.key, required this.link});
   final String link;
 
-  // final controller = WebViewController()
-  //   ..setJavaScriptMode(JavaScriptMode.unrestricted)
-  //   ..loadRequest(Uri.parse("https://instagram.com"));
-
   @override
   Widget build(BuildContext context) {
     final controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..loadRequest(Uri.parse(link));
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(

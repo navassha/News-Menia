@@ -67,4 +67,19 @@ class ApiModel {
     }
     return null;
   }
+
+  Future<NewsModel?> serchApi(String qurey) async {
+    Response response =
+        await dio.get("/everything", queryParameters: {"q": qurey});
+    try {
+      if (response.statusCode == 200) {
+        String json = jsonEncode(response.data);
+        return NewsModel.fromRawJson(json);
+      }
+      return null;
+    } on DioException catch (e) {
+      log(e.message.toString());
+    }
+    return null;
+  }
 }

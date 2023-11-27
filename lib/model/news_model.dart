@@ -34,7 +34,7 @@ class Article {
   Source source;
   String? author;
   String? title;
-  String description;
+  String? description;
   String url;
   String? urlToImage;
   DateTime publishedAt;
